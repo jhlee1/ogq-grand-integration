@@ -1,9 +1,13 @@
 <template>
-  <div>대시보드</div>
+  <div>뭐먹</div>
 </template>
 
 <script>
 export default {
-  name: 'dashboard'
+  name: 'Food'
 }
 </script>
+
+<style scoped>
+
+</style>
