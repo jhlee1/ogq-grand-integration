@@ -10,13 +10,19 @@
           <v-card
             v-for="card in cardList"
             :key="card.id"
+            :color="card.status ? '#26c6da' : 'pink darken-1'"
             class="ma-5 pa-12"
+            max-width="200"
             outlined
             tile>
-            {{ card.id }}
-            <v-card-actions>
-              <v-btn text>{{ card.rentalName }}</v-btn>
-            </v-card-actions>
+            <v-avatar
+              color="orange">
+              <span class="white--text headline">{{ card.id }}</span>
+            </v-avatar>
+            <v-card-title>
+              <v-btn v-if="card.status" text>대여가능</v-btn>
+              <v-btn v-else text>{{ card.rentalName }}</v-btn>
+            </v-card-title>
           </v-card>
         </v-row>
       </v-col>
@@ -27,6 +33,7 @@
 <script>
 import * as cardStore from '@/store/card'
 import * as cardGetters from '@/store/card/getters'
+import * as cardActions from '@/store/card/actions'
 
 export default {
   name: 'Card',
@@ -40,17 +47,17 @@ export default {
     ...cardStore.mapGetters({
       cardList: cardGetters.LOAD_CARD_LIST
     })
-    // cardList () {
-    //   // return this.$store.getters['card/loadCardList']
-    //   return [{
-    //     id: 1,
-    //     rentalName: '김연희'
-    //   }]
-    //   // return this.$store.getters.card.loadCardList
-    // }
   },
-  fecth ({ store }) {
-    store.dispatch('card/initCardList')
+  mounted () {
+    this.getTest()
+  },
+  methods: {
+    ...cardStore.mapActions([
+      cardActions.INIT_CARD_LIST
+    ]),
+    async getTest () {
+      await this[cardActions.INIT_CARD_LIST]()
+    }
   }
 }
 </script>
