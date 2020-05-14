@@ -13,12 +13,12 @@
             <v-list-item-title>대시보드</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link to="/room">
+        <v-list-item link to="/releaseNote">
           <v-list-item-action>
             <v-icon>mdi-google-classroom</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>회의실</v-list-item-title>
+            <v-list-item-title>릴리즈노트</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item link to="/card">
