@@ -11,18 +11,29 @@
             <v-card
               v-for="card in cardList"
               :key="card.id"
-              :color="card.status ? '#26c6da' : 'pink darken-1'"
-              class="ma-5 pa-12"
-              max-width="200"
-              outlined
+              :elevation="0"
+              class="mx-auto"
+              max-width="400"
               tile>
-              <v-avatar
-                color="orange">
-                <span class="white--text headline">{{ card.id }}</span>
-              </v-avatar>
-              <v-card-title>
-                <v-btn @click="clickCard(card)">{{ card.status ? '대여가능' : card.rentalName }}</v-btn>
-              </v-card-title>
+              <v-img
+                class="white--text align-end"
+                :src="card.status ? require('../../assets/images/able_card.png') : require('../../assets/images/disable_card.png')"
+              >
+                <v-avatar
+                  color="orange">
+                  <span class="white--text headline">{{ card.id }}</span>
+                </v-avatar>
+<!--                <v-card-title>-->
+                    <v-img
+                      class="white--text align-end"
+                      :src="require('../../assets/images/sticker.png')"
+                      max-width="200"
+                      style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);"
+                    >
+                      <v-btn @click="clickCard(card)">{{ card.status ? '대여가능' : card.rentalName }}</v-btn>
+                    </v-img>
+<!--                </v-card-title>-->
+              </v-img>
             </v-card>
           </v-row>
         </v-col>
