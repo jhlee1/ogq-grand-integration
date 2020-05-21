@@ -19,20 +19,26 @@
                 class="white--text align-end"
                 :src="card.status ? require('../../assets/images/able_card.png') : require('../../assets/images/disable_card.png')"
               >
-                <v-avatar
-                  color="orange">
-                  <span class="white--text headline">{{ card.id }}</span>
-                </v-avatar>
-<!--                <v-card-title>-->
+                <v-btn
+                  absolute
+                  dark
+                  fab
+                  top
+                  left
+                  color="pink"
+                  style="top: 3%; font-weight: bold; font-size: large;">
+                  {{ card.id }}
+                </v-btn>
+                    <v-btn v-if="card.status" @click="clickCard(card)" style="background: none; box-shadow: none; font-size: xxx-large; font-weight: bold;">대여가능</v-btn>
                     <v-img
+                      v-else
                       class="white--text align-end"
                       :src="require('../../assets/images/sticker.png')"
                       max-width="200"
                       style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);"
                     >
-                      <v-btn @click="clickCard(card)">{{ card.status ? '대여가능' : card.rentalName }}</v-btn>
+                      <v-btn large @click="clickCard(card)" style="background: none; box-shadow: none; font-size: xxx-large; font-weight: bold;">{{ card.rentalName }}</v-btn>
                     </v-img>
-<!--                </v-card-title>-->
               </v-img>
             </v-card>
           </v-row>
