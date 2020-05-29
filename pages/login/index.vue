@@ -1,6 +1,13 @@
 <template>
-  <div class="text-center">
-    <google-login :client-id="social.google.clientId" :scope="social.google.scope" @callback="(res) => processLogin('GOOGLE', res)" />
+  <div>
+    <div class="about_login">
+      <p class="tit">
+        OGQ 대통합
+      </p>
+      <div class="btns_login">
+        <google-login :client-id="social.google.clientId" :scope="social.google.scope" @callback="(res) => processLogin('GOOGLE', res)" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -13,7 +20,7 @@ export default {
   data() {
     const SOCIAL = {
       google: {
-        clientId: '176109249735-uorsueki6n45tbnfkvvidicf6k736ink.apps.googleusercontent.com',
+        clientId: '759830993627-j9p2qbkg3f9559tcs16pldih0d5bp5no.apps.googleusercontent.com',
         cookiepolicy: 'single_host_origin',
         scope: 'profile email'
       }
@@ -33,5 +40,8 @@ export default {
 </script>
 
 <style scoped>
-
+/** 로그인 **/
+.about_login {margin: 200px auto 60px; text-align: center;}
+.about_login .tit {font-size: 30px; font-weight: 700; margin-bottom: 20px;}
+.btns_login {margin: 0 auto 32px; text-align: center;}
 </style>
