@@ -41,6 +41,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios' // Ajax 처리를 위한 package
   ],
   /*
   ** vuetify module configuration
@@ -68,5 +69,8 @@ module.exports = {
     */
     extend (config, ctx) {
     }
+  },
+  axios: {
+    baseURL: 'http://127.0.0.1:8080'
   }
 }
