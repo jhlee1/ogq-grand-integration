@@ -1,4 +1,5 @@
 <template>
+<!--  <v-row justify="center">-->
     <div>
       <div class="about_login">
         <p class="tit">
@@ -8,8 +9,18 @@
           <google-login :client-id="social.google.clientId" :scope="social.google.scope" @callback="(res) => processLogin('GOOGLE', res)" />
         </div>
       </div>
-      <v-dialog v-model="modal" width="300">{{ modalMSG }}</v-dialog>
+      <v-dialog v-model="modal" width="400">
+        <v-card>
+          <v-card-title></v-card-title>
+          <v-card-text class="headline">
+            {{ modalMSG1 }}
+            <v-spacer></v-spacer>
+            {{ modalMSG2 }}
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </div>
+<!--  </v-row>-->
 </template>
 
 <script>
@@ -33,7 +44,8 @@ export default {
     return {
       social: SOCIAL,
       modal: false,
-      modalMSG: ''
+      modalMSG1: '',
+      modalMSG2: ''
     }
   },
   watch: {
@@ -59,7 +71,8 @@ export default {
     activePopup () {
       console.log('activePopup loginCode ', this.loginCode)
       if (this.loginCode === 400002) {
-        this.modalMSG = '텔레그램에서 인증해주세요. ex) /인증 이메일'
+        this.modalMSG1 = '텔레그램 인증이 필요합니다.'
+        this.modalMSG2 = 'ex) /인증 이메일'
         this.modal = true
       }
     }
