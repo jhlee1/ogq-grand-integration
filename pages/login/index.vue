@@ -1,17 +1,22 @@
 <template>
-  <div>
-    <div class="about_login">
-      <p class="tit">
-        OGQ 대통합
-      </p>
-      <div class="btns_login">
-        <google-login :client-id="social.google.clientId" :scope="social.google.scope" @callback="(res) => processLogin('GOOGLE', res)" />
+    <div>
+      <div class="about_login">
+        <p class="tit">
+          OGQ 대통합
+        </p>
+        <div class="btns_login">
+          <google-login :client-id="social.google.clientId" :scope="social.google.scope" @callback="(res) => processLogin('GOOGLE', res)" />
+        </div>
       </div>
+      <v-dialog v-model="modal" width="300">{{ modalMSG }}</v-dialog>
     </div>
-  </div>
 </template>
 
 <script>
+import * as authStore from '@/store/auth'
+import * as authGetters from '@/store/auth/getters'
+import * as authActions from '@/store/auth/actions'
+
 import GoogleLogin from '@/components/SocialLogin/GoogleLogin'
 
 export default {
@@ -26,14 +31,37 @@ export default {
       }
     }
     return {
-      social: SOCIAL
+      social: SOCIAL,
+      modal: false,
+      modalMSG: ''
     }
   },
+  watch: {
+    'loginCode': 'activePopup'
+  },
+  computed: {
+    ...authStore.mapGetters({
+      loginCode: authGetters.LOGIN_CODE
+    })
+  },
   methods: {
-    processLogin (provider, token) {
-      console.log('provider ', provider)
-      console.log('token ', token)
-      // login api 연동
+    ...authStore.mapActions([
+      authActions.GET_AUTH
+    ]),
+    async processLogin (provider, token) {
+      try {
+        await this[authActions.GET_AUTH](token)
+        console.log('loginCode ', this.loginCode)
+      } catch (err) {
+        console.log('err ', err)
+      }
+    },
+    activePopup () {
+      console.log('activePopup loginCode ', this.loginCode)
+      if (this.loginCode === 400002) {
+        this.modalMSG = '텔레그램에서 인증해주세요. ex) /인증 이메일'
+        this.modal = true
+      }
     }
   },
 }
