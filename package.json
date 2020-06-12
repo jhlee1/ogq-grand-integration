@@ -11,13 +11,17 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
+    "googleapis": "^51.0.0",
     "nuxt": "^2.0.0",
+    "vue-plugin-load-script": "^1.2.0",
     "vuetify-markdown-editor": "^3.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9",
-    "@nuxtjs/vuetify": "^1.0.0"
+    "@nuxtjs/vuetify": "^1.0.0",
+    "nodemon": "^1.18.9"
   }
 }

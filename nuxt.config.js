@@ -15,6 +15,10 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src: 'https://apis.google.com/js/client.js' },
+      { src:  'https://apis.google.com/js/api.js' },
     ]
   },
   /*
@@ -30,6 +34,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/vue-load-script'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -63,6 +68,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    transpile: ['google-api'],
     /*
     ** You can extend webpack config here
     */
