@@ -1,17 +1,33 @@
 <template>
-  <div>
-    <div class="about_login">
-      <p class="tit">
-        OGQ 대통합
-      </p>
-      <div class="btns_login">
-        <google-login :client-id="social.google.clientId" :scope="social.google.scope" @callback="(res) => processLogin('GOOGLE', res)" />
+<!--  <v-row justify="center">-->
+    <div>
+      <div class="about_login">
+        <p class="tit">
+          OGQ 대통합
+        </p>
+        <div class="btns_login">
+          <google-login :client-id="social.google.clientId" :scope="social.google.scope" @callback="(res) => processLogin('GOOGLE', res)" />
+        </div>
       </div>
+      <v-dialog v-model="modal" width="400">
+        <v-card>
+          <v-card-title></v-card-title>
+          <v-card-text class="headline">
+            {{ modalMSG1 }}
+            <v-spacer></v-spacer>
+            {{ modalMSG2 }}
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </div>
-  </div>
+<!--  </v-row>-->
 </template>
 
 <script>
+import * as authStore from '@/store/auth'
+import * as authGetters from '@/store/auth/getters'
+import * as authActions from '@/store/auth/actions'
+
 import GoogleLogin from '@/components/SocialLogin/GoogleLogin'
 
 export default {
@@ -26,14 +42,39 @@ export default {
       }
     }
     return {
-      social: SOCIAL
+      social: SOCIAL,
+      modal: false,
+      modalMSG1: '',
+      modalMSG2: ''
     }
   },
+  watch: {
+    'loginCode': 'activePopup'
+  },
+  computed: {
+    ...authStore.mapGetters({
+      loginCode: authGetters.LOGIN_CODE
+    })
+  },
   methods: {
-    processLogin (provider, token) {
-      console.log('provider ', provider)
-      console.log('token ', token)
-      // login api 연동
+    ...authStore.mapActions([
+      authActions.GET_AUTH
+    ]),
+    async processLogin (provider, token) {
+      try {
+        await this[authActions.GET_AUTH](token)
+        console.log('loginCode ', this.loginCode)
+      } catch (err) {
+        console.log('err ', err)
+      }
+    },
+    activePopup () {
+      console.log('activePopup loginCode ', this.loginCode)
+      if (this.loginCode === 400002) {
+        this.modalMSG1 = '텔레그램 인증이 필요합니다.'
+        this.modalMSG2 = 'ex) /인증 이메일'
+        this.modal = true
+      }
     }
   },
 }

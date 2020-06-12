@@ -29,7 +29,7 @@
             <v-list-item-title>법카 대여</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link to="food">
+        <v-list-item link to="restaurants">
           <v-list-item-action>
             <v-icon>mdi-food</v-icon>
           </v-list-item-action>
