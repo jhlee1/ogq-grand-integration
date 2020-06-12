@@ -17,7 +17,7 @@ export default {
   mounted() {
     // gapi.load('auth', this.gapiAuthIInit)
     // gapi.load('client', this.gapiAnalyticsInit)
-    const token = 'ya29.a0AfH6SMBI1XayCyewR4hRhn7ktA1KhqiLKbP4dxHhU2p79me_zVlRLjBOkFGrBAlQcOWcPMqNrvRQq8kML82D8I_yTKEbgN0pbVwK4_fepY44btq6tacDT0c3x1UqlVK5RewjT2ejVQ59l-ZE8ao3sICuueVj5rINLYdAaw'
+    const token = ''
     gAPI.postLogin(token)
   },
   methods: {
