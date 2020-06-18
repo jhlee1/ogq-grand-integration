@@ -36,7 +36,7 @@ export default {
   data() {
     const SOCIAL = {
       google: {
-        clientId: '759830993627-j9p2qbkg3f9559tcs16pldih0d5bp5no.apps.googleusercontent.com',
+        clientId: '176109249735-uorsueki6n45tbnfkvvidicf6k736ink.apps.googleusercontent.com',
         cookiepolicy: 'single_host_origin',
         scope: 'profile email'
       }

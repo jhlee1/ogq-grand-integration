@@ -34,7 +34,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/vue-load-script'
+    '~/plugins/vue-load-script',
+    '~/plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -77,6 +78,5 @@ module.exports = {
     }
   },
   axios: {
-    baseURL: 'http://127.0.0.1:8080'
   }
 }
