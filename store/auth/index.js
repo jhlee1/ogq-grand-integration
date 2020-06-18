@@ -10,7 +10,8 @@ export { mapState, mapGetters, mapActions }
 
 const state = () => ({
   admin: false,
-  loginCode: 200
+  loginCode: 200,
+  authentication: false
 })
 
 export default {

@@ -1,5 +1,7 @@
 <template>
-  <div><button label="Sign In" @click="getGoogleAnalytics">test</button></div>
+  <div>
+    <button label="Sign In" @click="getGoogleAnalytics">test</button>
+  </div>
 </template>
 
 <script>
@@ -13,6 +15,10 @@ export default {
         auth2: undefined,
         client: undefined
       }
+  },
+  beforeMount () {
+    const nextPage = this.isLoggedIn() ? '/dashboard' : '/login'
+    this.$router.push(nextPage)
   },
   mounted() {
     // gapi.load('auth', this.gapiAuthIInit)
@@ -32,7 +38,7 @@ export default {
     async gapiAuthIInit() {
       try {
         const res = await gapi.auth2.init({
-          'clientId': '176109249735-uorsueki6n45tbnfkvvidicf6k736ink.apps.googleusercontent.com',        
+          'clientId': '176109249735-uorsueki6n45tbnfkvvidicf6k736ink.apps.googleusercontent.com',
           'scope': 'profile'
         })
         console.log('res', res)
@@ -61,13 +67,13 @@ export default {
       try {
         const res = await gapi.client.init({
           'apiKey': 'AIzaSyCKbpkZPNqGGti_r0XMGxQo7BFWLgh3yHo',
-          'discoveryDocs': [ 'https://analyticsreporting.googleapis.com/$discovery/rest?version=v4' ],
+          'discoveryDocs': ['https://analyticsreporting.googleapis.com/$discovery/rest?version=v4'],
           'clientId': '176109249735-uorsueki6n45tbnfkvvidicf6k736ink.apps.googleusercontent.com',
           'scope': 'https://www.googleapis.com/auth/analytics.readonly'
         })
         console.log('res', res)
         this.client = res
-      } catch(err) {
+      } catch (err) {
         console.error('gapiAnalyticsInit', err)
       }
     },
@@ -88,14 +94,14 @@ export default {
                 }
               ],
               metrics: [
-                { expression: 'ga:users' }
+                {expression: 'ga:users'}
               ],
               dimensions: [
-                  { name: 'ga:userType' }
-                  , { name: 'ga:date' }
+                {name: 'ga:userType'}
+                , {name: 'ga:date'}
               ],
               orderBys: [
-                  { fieldName: 'ga:date'}
+                {fieldName: 'ga:date'}
               ]
             }
           ]
@@ -103,6 +109,10 @@ export default {
       })
       console.log('res', res)
     },
+    isLoggedIn() {
+      const cookie = document.cookie.match('(^|;) ?token=([^;]*)(;|$)')
+      return !!cookie
+    }
     /* async signin() {
       const gapi = await this.$gapi._load()
       console.log('gapi object :', gapi)
