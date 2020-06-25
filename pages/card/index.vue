@@ -29,23 +29,15 @@
                   style="top: 3%; font-weight: bold; font-size: large;">
                   {{ card.id }}
                 </v-btn>
-                    <v-btn v-if="card.status" @click="clickCard(card)" style="background: none; box-shadow: none; font-size: xxx-large; font-weight: bold;">대여가능</v-btn>
-                    <v-img
-                      v-else
-                      class="white--text align-end"
-                      :src="require('../../assets/images/sticker.png')"
-                      max-width="200"
-                      style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);"
-                    >
-                      <v-btn large @click="clickCard(card)" style="background: none; box-shadow: none; font-size: xxx-large; font-weight: bold;">{{ card.rentalName }}</v-btn>
-                    </v-img>
+                  <v-btn v-if="card.status" @click="clickCard(card)" class="rental">대여가능</v-btn>
+                  <v-btn v-else large @click="clickCard(card)" class="card_name">{{ card.rentalName }}</v-btn>
               </v-img>
             </v-card>
           </v-row>
         </v-col>
       </v-row>
     </v-container>
-    <modal :isActive="isActiveModal" :data="card" @close="toggleModal"></modal>
+    <card-modal :isActive="isActiveModal" :data="card" @close="toggleModal"></card-modal>
   </div>
 </template>
 
@@ -54,11 +46,11 @@ import * as cardStore from '@/store/card'
 import * as cardGetters from '@/store/card/getters'
 import * as cardActions from '@/store/card/actions'
 
-import Modal from '@/components/modal'
+import CardModal from '@/components/CardModal'
 
 export default {
   name: 'Card',
-  components: { Modal },
+  components: { CardModal },
   data () {
     return {
       alignment: 'center',
@@ -95,5 +87,44 @@ export default {
 </script>
 
 <style scoped>
+  .rental {
+    background: none !important;
+    box-shadow: none;
+    font-size: xxx-large;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    position: absolute;
+}
+/*.topheader h1 a { display: inline-block; width: 68px; height: 23px; background: url('~assets/images/toplogo2.png') no-repeat left top; background-size: 100% auto; vertical-align: top; }*/
 
+  .card_name {
+    background: none !important;
+    box-shadow: none;
+    font-size: xxx-large;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    height: 100% !important;
+    position: absolute;
+}
+  /*hover 효과 지워주기*/
+  .card_name:hover {
+    opacity: 1;
+  }
+
+  .card_name:before {
+    content: "";
+    display: inline-block;
+    background: url('../../assets/images/sticker.png') 0 0 no-repeat;
+    background-size: 100% auto;
+    width: 180px;
+    height: 111px;
+    opacity: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 </style>

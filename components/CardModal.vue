@@ -6,7 +6,9 @@
     <v-card>
       <v-row align="center" justify="center">
         <v-col>
-          <v-card-title class="headline" align="center" style="background: none; box-shadow: none; font-weight: bold; display: block;">{{ data.status ? '대여가능' : data.rentalName }}</v-card-title>
+          <v-card-title class="headline" align="center">
+            {{ data.status ? '대여가능' : data.rentalName }}
+          </v-card-title>
         </v-col>
         <v-img
           class="white--text align-end"
@@ -49,7 +51,7 @@
 
 <script>
     export default {
-      name: 'modal',
+      name: 'CardModal',
       props: {
         isActive: {
           type: Boolean,
@@ -74,4 +76,11 @@
 </script>
 
 <style scoped>
+  .headline {
+    background: none;
+    box-shadow: none;
+    font-weight: bold;
+    display: block;
+    font-size: 3rem !important;
+  }
 </style>

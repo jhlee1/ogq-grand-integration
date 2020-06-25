@@ -2,6 +2,7 @@
   <client-only>
     <v-app id="inspire">
       <v-navigation-drawer
+        v-if="login"
         v-model="drawer"
         app
       >

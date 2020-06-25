@@ -16,6 +16,7 @@ export default {
       gAPI.postLogin(data.data.token)
       commit(mutations.GET_AUTH, data.data.admin)
     }).catch((err) => {
+      console.error('GET_AUTH Actions error ', err)
       commit(mutations.LOGIN_CODE, err.response.data.code)
     })
   }
