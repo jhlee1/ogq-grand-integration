@@ -10,5 +10,4 @@ googleRequest.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-console.log('created gapi')
 export default googleRequest

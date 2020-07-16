@@ -66,7 +66,6 @@ export default {
     async processLogin (provider, token) {
       try {
         await this[authActions.GET_AUTH](token)
-        console.log('loginCode ', this.loginCode)
       } catch (err) {
         console.log('err ', err)
       }
