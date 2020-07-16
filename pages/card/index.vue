@@ -10,14 +10,14 @@
             style="height: 100%">
             <v-card
               v-for="card in cardList"
-              :key="card.id"
+              :key="card.cardNum"
               :elevation="0"
               class="mx-auto"
               max-width="400"
               tile>
               <v-img
                 class="white--text align-end"
-                :src="card.status ? require('../../assets/images/able_card.png') : require('../../assets/images/disable_card.png')"
+                :src="card.borrowed ? require('../../assets/images/disable_card.png') : require('../../assets/images/able_card.png')"
               >
                 <v-btn
                   absolute
@@ -27,10 +27,10 @@
                   left
                   color="pink"
                   style="top: 3%; font-weight: bold; font-size: large;">
-                  {{ card.id }}
+                  {{ card.cardNum }}
                 </v-btn>
-                  <v-btn v-if="card.status" @click="clickCard(card)" class="rental">대여가능</v-btn>
-                  <v-btn v-else large @click="clickCard(card)" class="card_name">{{ card.rentalName }}</v-btn>
+                  <v-btn v-if="!card.borrowed" @click="clickCard(card)" class="rental">대여가능</v-btn>
+                  <v-btn v-else large @click="clickCard(card)" class="card_name">{{ card.name }}</v-btn>
               </v-img>
             </v-card>
           </v-row>
