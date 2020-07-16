@@ -32,7 +32,8 @@ export default {
     async gapiAuthIInit() {
       try {
         const res = await gapi.auth2.init({
-          'clientId': '176109249735-uorsueki6n45tbnfkvvidicf6k736ink.apps.googleusercontent.com',        
+          // 'clientId': '176109249735-uorsueki6n45tbnfkvvidicf6k736ink.apps.googleusercontent.com',
+          'clientId': '759830993627-j9p2qbkg3f9559tcs16pldih0d5bp5no.apps.googleusercontent.com',
           'scope': 'profile'
         })
         console.log('res', res)
@@ -62,7 +63,8 @@ export default {
         const res = await gapi.client.init({
           'apiKey': 'AIzaSyCKbpkZPNqGGti_r0XMGxQo7BFWLgh3yHo',
           'discoveryDocs': [ 'https://analyticsreporting.googleapis.com/$discovery/rest?version=v4' ],
-          'clientId': '176109249735-uorsueki6n45tbnfkvvidicf6k736ink.apps.googleusercontent.com',
+          // 'clientId': '176109249735-uorsueki6n45tbnfkvvidicf6k736ink.apps.googleusercontent.com',
+          'clientId': '759830993627-j9p2qbkg3f9559tcs16pldih0d5bp5no.apps.googleusercontent.com',
           'scope': 'https://www.googleapis.com/auth/analytics.readonly'
         })
         console.log('res', res)
