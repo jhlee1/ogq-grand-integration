@@ -12,7 +12,7 @@ export default {
     }).then((data) => {
       console.log('data===>>> ', data)
       login(data.data.token)
-      gAPI.postLogin(data.data.token)
+      gAPI.postLogin(payload.accessToken)
       commit(mutations.GET_AUTH, data.data.admin)
     }).catch((err) => {
       console.error('GET_AUTH Actions error ', err)

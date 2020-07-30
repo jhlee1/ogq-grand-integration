@@ -8,6 +8,9 @@ export default {
     // googleRequest.defaults.headers.common['authorization'] = 'Bearer ' + token
     googleRequest.defaults.headers.get['authorization'] = 'Bearer ' + token
     googleRequest.defaults.headers.post['authorization'] = 'Bearer ' + token
+    /* googleRequest.defaults.headers.post['x-origin'] = 'http://dev.creators.ogq.me:3000'
+    googleRequest.defaults.headers.post['x-referer'] = 'http://dev.creators.ogq.me:3000' */
+
   },
   getAnalytics () {
     const params = {

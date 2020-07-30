@@ -1,6 +1,7 @@
 const colors = require('vuetify/es5/util/colors').default
 
 module.exports = {
+  runtimerCompiler: true,
   mode: 'universal',
   /*
   ** Headers of the page
@@ -35,7 +36,8 @@ module.exports = {
   */
   plugins: [
     '~/plugins/vue-load-script',
-    '~/plugins/axios'
+    '~/plugins/axios',
+    '~/plugins/tui_chart.client.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -75,6 +77,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      config.resolve.alias['vue'] = 'vue/dist/vue.common'
     }
   },
   axios: {
