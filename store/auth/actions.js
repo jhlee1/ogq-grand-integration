@@ -10,11 +10,13 @@ export default {
     this.$axios.post('/auth/login', {
       googleAccessToken: payload.accessToken
     }).then((data) => {
+      console.log('data===>>> ', data)
       login(data.data.token)
       gAPI.postLogin(data.data.token)
       commit(mutations.GET_AUTH, data.data.admin)
     }).catch((err) => {
       console.error('GET_AUTH Actions error ', err)
+      console.log('eeeeeeee ', err)
       commit(mutations.LOGIN_CODE, err.response.data.code)
     })
   }

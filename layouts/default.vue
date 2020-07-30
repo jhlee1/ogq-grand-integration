@@ -79,9 +79,11 @@ export default {
   }),
   beforeMount () {
     this.login = this.isLoggedIn()
-    console.log('login ', this.login)
     this.authentication = this.$store.state.authentication
     console.log('authentication ', this.authentication)
+    if(this.login) {
+      this.$router.push('/card')
+    }
   },
   methods: {
     isLoggedIn () {

@@ -8,19 +8,10 @@
 <!--        </p>-->
         <div class="btns_login">
           <google-login :client-id="social.google.clientId" :scope="social.google.scope" @callback="(res) => processLogin('GOOGLE', res)" />
-        </div>
+        </div>{{ loginCode }}
         <v-img :src="require('~/assets/images/img_login_illust.png')" style="width: 70%; margin: 0 auto;"></v-img>
       </div>
-      <v-dialog v-model="modal" width="400">
-        <v-card>
-          <v-card-title></v-card-title>
-          <v-card-text class="headline">
-            {{ modalMSG1 }}
-            <v-spacer></v-spacer>
-            {{ modalMSG2 }}
-          </v-card-text>
-        </v-card>
-      </v-dialog>
+      <one-btn-modal :title="title" :content="content" :active="active" />
     </div>
 <!--  </v-row>-->
 </template>
@@ -31,10 +22,11 @@ import * as authGetters from '@/store/auth/getters'
 import * as authActions from '@/store/auth/actions'
 
 import GoogleLogin from '@/components/SocialLogin/GoogleLogin'
+import OneBtnModal from '@/components/OneBtnModal'
 
 export default {
   name: 'Login',
-  components: { GoogleLogin },
+  components: { GoogleLogin, OneBtnModal },
   data() {
     const SOCIAL = {
       google: {
@@ -46,9 +38,9 @@ export default {
     }
     return {
       social: SOCIAL,
-      modal: false,
-      modalMSG1: '',
-      modalMSG2: ''
+      active: false,
+      title: '',
+      content: ''
     }
   },
   watch: {
@@ -64,18 +56,30 @@ export default {
       authActions.GET_AUTH
     ]),
     async processLogin (provider, token) {
-      try {
-        await this[authActions.GET_AUTH](token)
-      } catch (err) {
-        console.log('err ', err)
+      if (this.loginCode === 400002) {
+        this.title = '텔레그램 인증이 필요합니다.'
+        this.content = 'ex) /인증 이메일'
+        this.active = true
+      } else {
+        try {
+          const response = await this[authActions.GET_AUTH](token)
+          console.log('response dddd ', response)
+          console.log('loginCOde ', this.loginCode)
+          // if (response.status === 200) {
+          //   this.$router.push('/card')
+          // }
+          // console.log('response ', response)
+          // this.$router.push('/card')
+        } catch (err) {
+          console.error('processLogin Err ', err)
+        }
       }
     },
     activePopup () {
-      console.log('activePopup loginCode ', this.loginCode)
       if (this.loginCode === 400002) {
-        this.modalMSG1 = '텔레그램 인증이 필요합니다.'
-        this.modalMSG2 = 'ex) /인증 이메일'
-        this.modal = true
+        this.title = '텔레그램 인증이 필요합니다.'
+        this.content = 'ex) /인증 이메일'
+        this.active = true
       }
     }
   },

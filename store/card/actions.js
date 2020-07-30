@@ -15,7 +15,7 @@ export default {
     const res = [{
       cardNum: 1,
       name: '김연희',
-      borrowed: false
+      borrowed: true
     }]
     commit(mutations.INIT_CARD_LIST, res)
   }
