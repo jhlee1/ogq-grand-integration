@@ -42,14 +42,23 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar
-        app
-        color="indigo"
-        dark
-      >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <v-toolbar-title>OGQ 대통합</v-toolbar-title>
-      </v-app-bar>
+        <v-app-bar
+          app
+          color="indigo"
+          dark
+        >
+          <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+          <v-toolbar-title>OGQ 대통합</v-toolbar-title>
+          <v-col>
+            <div class="text-right">
+              <div class="my-2">
+                <v-btn color="success" fab small dark>
+                  <v-icon>mdi-account-circle</v-icon>
+                </v-btn>
+              </div>
+            </div>
+          </v-col>
+        </v-app-bar>
 
       <v-content>
         <nuxt />
@@ -66,18 +75,22 @@
 </template>
 
 <script>
+import * as authStore from '@/store/auth'
+import * as authGetters from '@/store/auth/getters'
 
 export default {
   name: 'Default',
-  props: {
-    source: String,
-  },
   data: () => ({
     drawer: null,
-    login: false,
-    authentication: false
+    login: false
   }),
+  computed: {
+    ...authStore.mapGetters({
+      admin: authGetters.ADMIN
+    })
+  },
   beforeMount () {
+    console.log('admin ', this.admin)
     this.login = this.isLoggedIn()
     this.authentication = this.$store.state.authentication
     console.log('authentication ', this.authentication)

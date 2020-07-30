@@ -8,7 +8,7 @@
 <!--        </p>-->
         <div class="btns_login">
           <google-login :client-id="social.google.clientId" :scope="social.google.scope" @callback="(res) => processLogin('GOOGLE', res)" />
-        </div>{{ loginCode }}
+        </div>
         <v-img :src="require('~/assets/images/img_login_illust.png')" style="width: 70%; margin: 0 auto;"></v-img>
       </div>
       <one-btn-modal :title="title" :content="content" :active="active" />
@@ -62,14 +62,13 @@ export default {
         this.active = true
       } else {
         try {
-          const response = await this[authActions.GET_AUTH](token)
-          console.log('response dddd ', response)
+          await this[authActions.GET_AUTH](token)
           console.log('loginCOde ', this.loginCode)
           // if (response.status === 200) {
           //   this.$router.push('/card')
           // }
           // console.log('response ', response)
-          // this.$router.push('/card')
+          this.$router.push('/card')
         } catch (err) {
           console.error('processLogin Err ', err)
         }

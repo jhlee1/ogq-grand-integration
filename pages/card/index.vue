@@ -6,7 +6,7 @@
           <v-row
             :align="alignment"
             :justify="justify"
-            class="grey lighten-5"
+            class="lighten-5"
             style="height: 100%">
             <v-card
               v-for="card in cardList"
