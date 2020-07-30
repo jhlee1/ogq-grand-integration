@@ -12,12 +12,14 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.11.0",
+    "@toast-ui/vue-chart": "^1.1.2",
     "axios": "^0.19.2",
     "cors": "^2.8.5",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "googleapis": "^51.0.0",
     "nuxt": "^2.0.0",
+    "tui-chart": "^3.11.2",
     "vue-plugin-load-script": "^1.2.0",
     "vuetify-markdown-editor": "^3.0.0"
   },
