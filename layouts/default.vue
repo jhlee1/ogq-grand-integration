@@ -49,12 +49,17 @@
         >
           <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
           <v-toolbar-title>OGQ 대통합</v-toolbar-title>
-          <v-col>
+          <v-col v-if="login">
             <div class="text-right">
               <div class="my-2">
-                <v-btn color="success" fab small dark>
-                  <v-icon>mdi-account-circle</v-icon>
-                </v-btn>
+                <v-tooltip left>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn color="success" fab small dark v-bind="attrs" v-on="on" @click="logout">
+                      <v-icon>mdi-account-circle</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>로그아웃</span>
+                </v-tooltip>
               </div>
             </div>
           </v-col>
@@ -75,6 +80,7 @@
 </template>
 
 <script>
+import utils from '@/utils/cookieUtils'
 import * as authStore from '@/store/auth'
 import * as authGetters from '@/store/auth/getters'
 
@@ -102,6 +108,10 @@ export default {
     isLoggedIn () {
       const cookie = document.cookie.match('(^|;) ?token=([^;]*)(;|$)')
       return !!cookie
+    },
+    logout () {
+      utils.logout()
+      window.location.replace('/login')
     }
   },
 }
