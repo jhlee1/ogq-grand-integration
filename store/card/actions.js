@@ -7,7 +7,7 @@ export default {
   async [INIT_CARD_LIST] ({ commit }) {
     this.$axios.get('/corporateCards', {
       headers: {
-        token: utils.getCookie('token')
+        'Authorization': 'Bearer '+ utils.getCookie('token')
       }
     }).then((data) => {
       console.log('data ', data)
