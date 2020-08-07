@@ -16,7 +16,6 @@ export default {
       commit(mutations.GET_AUTH, data.data.admin)
     }).catch((err) => {
       console.error('GET_AUTH Actions error ', err)
-      console.log('eeeeeeee ', err)
       commit(mutations.LOGIN_CODE, err.response.data.code)
     })
   }
