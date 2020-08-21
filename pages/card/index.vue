@@ -37,7 +37,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <card-modal :isActive="isActiveModal" :data="card" @close="toggleModal"></card-modal>
+    <card-modal :isActive="isActiveModal" :data="card" @close="toggleModal" @return="returnCard" @rental="rentalCard"></card-modal>
   </div>
 </template>
 
@@ -77,10 +77,17 @@ export default {
     clickCard (card) {
       this.toggleModal()
       // 해당 카드 정보 저장
+      console.log('card ', card)
       this.card = card
     },
     toggleModal () {
       this.isActiveModal = !this.isActiveModal
+    },
+    returnCard () {
+
+    },
+    rentalCard () {
+
     }
   }
 }

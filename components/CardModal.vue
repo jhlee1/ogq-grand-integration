@@ -7,12 +7,12 @@
       <v-row align="center" justify="center">
         <v-col>
           <v-card-title class="headline" align="center">
-            {{ data.status ? '대여가능' : data.rentalName }}
+            {{ !data.borrowed ? '대여가능' : data.name }}
           </v-card-title>
         </v-col>
         <v-img
           class="white--text align-end"
-          :src="data.status ? require('~/assets/images/able_card.png') : require('~/assets/images/disable_card.png')"
+          :src="!data.borrowed ? require('~/assets/images/able_card.png') : require('~/assets/images/disable_card.png')"
           width="100%"></v-img>
         <v-btn
           absolute
@@ -21,7 +21,7 @@
           right
           color="pink"
           style="top: 15%; font-weight: bold; font-size: large;">
-          {{ data.id }}
+          {{ data.cardNum }}
         </v-btn>
           <v-card-actions>
             <v-col>
@@ -70,6 +70,7 @@
         returnCard () {
           // 카드반납 actions
           this.$emit('close')
+          this.$emit('returnCard', this.data.cardNum)
         }
       }
     }

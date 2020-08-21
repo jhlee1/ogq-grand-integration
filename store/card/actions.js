@@ -10,15 +10,10 @@ export default {
         'Authorization': 'Bearer '+ utils.getCookie('token')
       }
     }).then((data) => {
-      console.log('data ', data)
+      const res = data.data
+      commit(mutations.INIT_CARD_LIST, res)
     }).catch((err) => {
       console.error('INIT_CARD_LIST Actions error ', err)
     })
-    const res = [{
-      cardNum: 1,
-      name: '김연희',
-      borrowed: true
-    }]
-    commit(mutations.INIT_CARD_LIST, res)
   }
 }
