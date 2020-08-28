@@ -10,7 +10,8 @@ export { mapState, mapGetters, mapActions }
 
 const state = () => ({
   card: {},
-  cardList: []
+  cardList: [],
+  returned: true
 })
 
 export default {

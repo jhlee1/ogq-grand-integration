@@ -64,13 +64,12 @@
       },
       methods: {
         rentalCard () {
-          // 카드대여 actions
           this.$emit('close')
+          this.$emit('rental', this.data.cardNum)
         },
         returnCard () {
-          // 카드반납 actions
           this.$emit('close')
-          this.$emit('returnCard', this.data.cardNum)
+          this.$emit('return', this.data.cardNum)
         }
       }
     }

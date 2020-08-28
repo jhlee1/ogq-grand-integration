@@ -47,6 +47,7 @@ import * as cardGetters from '@/store/card/getters'
 import * as cardActions from '@/store/card/actions'
 
 import CardModal from '@/components/CardModal'
+import {PUT_USE_CARD} from "../../store/card/actions";
 
 export default {
   name: 'Card',
@@ -61,15 +62,21 @@ export default {
   },
   computed: {
     ...cardStore.mapGetters({
-      cardList: cardGetters.LOAD_CARD_LIST
+      cardList: cardGetters.LOAD_CARD_LIST,
+      returned: cardGetters.RETURNED
     })
   },
   mounted () {
     this.getTest()
   },
+  watch: {
+    returned: 'getTest'
+  },
   methods: {
     ...cardStore.mapActions([
-      cardActions.INIT_CARD_LIST
+      cardActions.INIT_CARD_LIST,
+      cardActions.PUT_BACK_CARD,
+      cardActions.PUT_USE_CARD
     ]),
     async getTest () {
       await this[cardActions.INIT_CARD_LIST]()
@@ -83,11 +90,11 @@ export default {
     toggleModal () {
       this.isActiveModal = !this.isActiveModal
     },
-    returnCard () {
-
+    async returnCard (cardNum) {
+      await this[cardActions.PUT_BACK_CARD](cardNum)
     },
-    rentalCard () {
-
+    async rentalCard (cardNum) {
+      await this[cardActions.PUT_USE_CARD](cardNum)
     }
   }
 }
