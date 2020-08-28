@@ -52,6 +52,14 @@
           <v-col v-if="login">
             <div class="text-right">
               <div class="my-2">
+                <v-tooltip left v-if="!admin">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn color="success" fab small dark v-bind="attrs" v-on="on" @click="cardManage">
+                      <v-icon>mdi-card-plus-outline</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>카드관리</span>
+                </v-tooltip>
                 <v-tooltip left>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn color="success" fab small dark v-bind="attrs" v-on="on" @click="logout">
@@ -75,6 +83,7 @@
       >
         <span class="white--text">&copy; 2020 OGQ Grand Integration</span>
       </v-footer>
+      <list-modal :isActive="isActiveModal" :data="cardList" />
     </v-app>
   </client-only>
 </template>
@@ -83,16 +92,26 @@
 import utils from '@/utils/cookieUtils'
 import * as authStore from '@/store/auth'
 import * as authGetters from '@/store/auth/getters'
+import * as cardStore from '@/store/card'
+import * as cardGetters from '@/store/card/getters'
+import * as cardActions from '@/store/card/actions'
+
+import ListModal from '@/components/ListModal'
 
 export default {
   name: 'Default',
+  components: { ListModal },
   data: () => ({
     drawer: null,
-    login: false
+    login: false,
+    isActiveModal: false
   }),
   computed: {
     ...authStore.mapGetters({
       admin: authGetters.ADMIN
+    }),
+    ...cardStore.mapGetters({
+      cardList: cardGetters.LOAD_CARD_LIST
     })
   },
   beforeMount () {
@@ -105,6 +124,9 @@ export default {
     }
   },
   methods: {
+    ...cardStore.mapActions([
+      cardActions.INIT_CARD_LIST
+    ]),
     isLoggedIn () {
       const cookie = document.cookie.match('(^|;) ?token=([^;]*)(;|$)')
       return !!cookie
@@ -112,6 +134,13 @@ export default {
     logout () {
       utils.logout()
       window.location.replace('/login')
+    },
+    cardManage () {
+      this.getCardList()
+      this.isActiveModal = !this.isActiveModal
+    },
+    async getCardList () {
+      await this[cardActions.INIT_CARD_LIST]()
     }
   },
 }
